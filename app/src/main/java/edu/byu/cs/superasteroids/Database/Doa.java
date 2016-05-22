@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -294,45 +295,80 @@ public class Doa {
                         int damage){
 
   }
+  private static final String[] tables = {
+          "levels",
+          "levelObjects",
+          "levelAsteroids",
+          "backgroundObjects",
+          "asteroids",
+          "mainBodies",
+          "cannons",
+          "extraParts",
+          "engines",
+          "powerCores"
+  };
+  public void clearAll(){
+    for(int i = 0; i < tables.length; i++){
+      db.delete(tables[i],null,null);
+    }
+  }
 
   /**
    *
    * @return Set of all cannons
    */
-  public Set<Cannon> getCannons(){
-    final String SQL = "select * from cannons;";
-    Set<Cannon> cannons = new HashSet();
-    Cursor cursor = db.rawQuery(SQL,null);
-//    final String SQL = "select id, title, author, genre " +
-//            "from book " +
-//            "where author = ?";
-//
-//    Set<Book> result = new HashSet<>();
-//
-//    Cursor cursor = db.rawQuery(SQL, new String[]{author});
-//    try {
-//      cursor.moveToFirst();
-//      while (!cursor.isAfterLast()) {
-//        Book book = new Book();
-//
-//        book.setID(cursor.getLong(0));
-//        book.setTitle(cursor.getString(1));
-//        book.setAuthor(cursor.getString(2));
-//        book.setGenre(Genre.valueOf(cursor.getString(3)));
-//
-//        result.add(book);
-//
-//        cursor.moveToNext();
-//      }
-//    }
-//    finally {
-//      cursor.close();
-//    }
-//
-//    return result;
+  private JSONArray getJSONfromSQL(String table){
+    String query = "select * from " + table + ";";
+    JSONArray resultSet     = new JSONArray();
+    Cursor cursor = db.rawQuery(query,null);
+    cursor.moveToFirst();
+    while (cursor.isAfterLast() == false) {
 
-    return null;
+      int totalColumn = cursor.getColumnCount();
+      JSONObject rowObject = new JSONObject();
+
+      for( int i=0 ;  i< totalColumn ; i++ )
+      {
+        if( cursor.getColumnName(i) != null )
+        {
+          try
+          {
+            if( cursor.getString(i) != null )
+            {
+              rowObject.put(cursor.getColumnName(i) ,  cursor.getString(i) );
+            }
+             else
+            {
+              rowObject.put( cursor.getColumnName(i) ,  cursor.getInt(i) );
+            }
+          }
+          catch( Exception e )
+          {
+            e.printStackTrace();
+          }
+        }
+      }
+      resultSet.put(rowObject);
+      cursor.moveToNext();
+    }
+    cursor.close();
+//    Log.d("TAG_NAME", resultSet.toString() );
+    return resultSet;
   }
+  public Set<Cannon> getCannons(){
+    Set<Cannon> cannons = new HashSet();
+    JSONArray json = getJSONfromSQL("cannons");
+    for(int i = 0; i < json.length(); i++){
+      try {
+        cannons.add(new Cannon(json.getJSONObject(i).getString("attachPoint"), json.getJSONObject(i).getString("emitPoint"), json.getJSONObject(i).getString("image"), json.getJSONObject(i).getInt("imageWidth"), json.getJSONObject(i).getInt("imageHeight"), json.getJSONObject(i).getString("attackImage"), json.getJSONObject(i).getInt("attackImageWidth"), json.getJSONObject(i).getInt("attackImageHeight"), json.getJSONObject(i).getString("attackSound"), json.getJSONObject(i).getInt("damage")));
+      }catch (Exception e){
+        e.printStackTrace();
+      }
+    }
+    return cannons;
+  }
+
+
 
   /**
    *
@@ -350,7 +386,17 @@ public class Doa {
    * @return set of all extra parts
    */
   public Set<ExtraPart> getExtraParts(){
-    return null;
+    Set<ExtraPart> extraParts = new HashSet();
+    JSONArray json = getJSONfromSQL("cannons");
+    for(int i = 0; i < json.length(); i++){
+      try {
+        JSONObject newObject = json.getJSONObject(i);
+        extraParts.add(new ExtraPart(newObject.getString("attachPoint"), newObject.getString("image"), newObject.getInt("imageWidth"), newObject.getInt("imageHeight")));
+      }catch (Exception e){
+        e.printStackTrace();
+      }
+    }
+    return extraParts;
   }
 
   /**
@@ -371,7 +417,17 @@ public class Doa {
    * @return set of all Engines
    */
   public Set<Engine> getEngines(){
-    return null;
+    Set<Engine> engines = new HashSet();
+    JSONArray json = getJSONfromSQL("cannons");
+    for(int i = 0; i < json.length(); i++){
+      try {
+        JSONObject engine = json.getJSONObject(i);
+        engines.add(new Engine(engine.getInt("imageHeight"), engine.getInt("baseSpeed"),engine.getInt("baseTurnRate"),engine.getString("attachPoint"),engine.getString("image"), engine.getInt("imageWidth")));
+      }catch (Exception e){
+        e.printStackTrace();
+      }
+    }
+    return engines;
   }
 
   /**

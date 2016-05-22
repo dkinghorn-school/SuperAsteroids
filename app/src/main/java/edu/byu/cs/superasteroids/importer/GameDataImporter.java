@@ -6,8 +6,11 @@ import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.util.Set;
 
+import edu.byu.cs.superasteroids.Database.DbOpenHelper;
 import edu.byu.cs.superasteroids.Database.Doa;
+import edu.byu.cs.superasteroids.components.Cannon;
 
 /**
  * Created by devonkinghorn on 5/17/16.
@@ -23,12 +26,14 @@ public class GameDataImporter implements IGameDataImporter {
    * to any error.
    */
   Doa doa;
+
   public boolean importData(InputStreamReader dataInputReader){
 
     Doa tempDoa = Doa.getSingleton();
     if(tempDoa == null)
       return false;
     doa = tempDoa;
+    doa.clearAll();
     try {
 //      String inputStr;
 //      while ((inputStr = streamReader.readLine()) != null)
@@ -54,7 +59,7 @@ public class GameDataImporter implements IGameDataImporter {
       addEngines(asteroidsJson.getJSONArray("engines"));
       addPowerCores(asteroidsJson.getJSONArray("powerCores"));
       addBackgroundObjects(asteroidsJson.getJSONArray("objects"));
-
+      Set<Cannon> cannons = doa.getCannons();
       System.out.println("l");
 
 
