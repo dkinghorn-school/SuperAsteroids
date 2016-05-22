@@ -10,7 +10,13 @@ import java.util.Set;
 
 import edu.byu.cs.superasteroids.Database.DbOpenHelper;
 import edu.byu.cs.superasteroids.Database.Doa;
+import edu.byu.cs.superasteroids.components.Asteroid;
 import edu.byu.cs.superasteroids.components.Cannon;
+import edu.byu.cs.superasteroids.components.Engine;
+import edu.byu.cs.superasteroids.components.ExtraPart;
+import edu.byu.cs.superasteroids.components.Level;
+import edu.byu.cs.superasteroids.components.MainBody;
+import edu.byu.cs.superasteroids.components.PowerCore;
 
 /**
  * Created by devonkinghorn on 5/17/16.
@@ -60,6 +66,12 @@ public class GameDataImporter implements IGameDataImporter {
       addPowerCores(asteroidsJson.getJSONArray("powerCores"));
       addBackgroundObjects(asteroidsJson.getJSONArray("objects"));
       Set<Cannon> cannons = doa.getCannons();
+      Set<ExtraPart> eps = doa.getExtraParts();
+      Set<Engine> engines = doa.getEngines();
+      Set<Asteroid> asteroids = doa.getAsteroids();
+      Set<Level> levels = doa.getLevels();
+      Set<MainBody> mainBodies = doa.getMainBodies();
+      Set<PowerCore> powerCores = doa.getPowerCores();
       System.out.println("l");
 
 
@@ -157,6 +169,7 @@ public class GameDataImporter implements IGameDataImporter {
   private void addAsteroids(JSONArray asteroids){
     for(int i = 0; i < asteroids.length(); i++){
       try {
+        asteroids.getJSONObject(i).put("id",i+1);
         doa.addAsteroid(asteroids.getJSONObject(i));
       }catch(Exception e){
 

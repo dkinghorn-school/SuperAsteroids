@@ -43,7 +43,8 @@ public class DbOpenHelper extends SQLiteOpenHelper {
                   "(name varchar(255) not null, " +
                   "image varchar(255) not null, " +
                   "imageWidth integer not null, " +
-                  "imageHeight integer not null)";
+                  "imageHeight integer not null, " +
+                  "id integer not null)";
 
   public static final String CREATE_MAINBODIES =
           "create table mainBodies " +

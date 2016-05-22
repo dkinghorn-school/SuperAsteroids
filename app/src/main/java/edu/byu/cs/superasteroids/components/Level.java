@@ -1,5 +1,7 @@
 package edu.byu.cs.superasteroids.components;
 
+import org.json.JSONArray;
+
 import java.util.Set;
 
 /**
@@ -13,22 +15,37 @@ public class Level {
   private int width;
   private int height;
   private String music;
-  private Set<BackgroundObject> objects;
+  private Set<BackgroundObject> backgroundObjects;
 
   /**
    *
    * @param number level number
    * @param title title of level
    * @param hint hint at beginning of level
-   * @param Width width of arena
-   * @param Height height of arena
+   * @param width width of arena
+   * @param height height of arena
    * @param music music to be played durring level
-   * @param objects objects in background
+   * @param backgroundObjects objects in background
    */
-  public Level(int number, String title, String hint, int Width, int Height,String music, Set<Object> objects){
-
+  public Level(int number, String title, String hint, int width, int height, String music, Set<BackgroundObject> backgroundObjects){
+    this.number = number;
+    this.title = title;
+    this.hint = hint;
+    this.width = width;
+    this.music = music;
+    this.backgroundObjects = backgroundObjects;
   }
-
+  @Override
+  public int hashCode(){
+    return this.number;
+  }
+  @Override
+  public boolean equals(Object o){
+    if(o.getClass() == this.getClass() && ((Level)o).number == this.number){
+      return true;
+    }
+    return false;
+  }
   public void setNumber(int number) {
     this.number = number;
   }
@@ -54,6 +71,6 @@ public class Level {
   }
 
   public void setObjects(Set<BackgroundObject> objects) {
-    this.objects = objects;
+    this.backgroundObjects = objects;
   }
 }

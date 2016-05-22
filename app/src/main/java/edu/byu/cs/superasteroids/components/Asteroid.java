@@ -10,7 +10,7 @@ public class Asteroid {
   private String image;
   private int width;
   private int height;
-
+  private int id;
   /**
    *
    * @param name name of asteroid
@@ -18,8 +18,12 @@ public class Asteroid {
    * @param width width of unscaled asteroid
    * @param height height of unscaled asteroid
    */
-  public Asteroid(String name, String image, int width, int height){
-
+  public Asteroid(String name, String image, int width, int height, int id) {
+    this.name = name;
+    this.image = image;
+    this.width = width;
+    this.height = height;
+    this.id = id;
   }
 
   /**

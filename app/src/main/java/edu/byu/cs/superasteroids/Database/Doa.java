@@ -52,6 +52,8 @@ public class Doa {
     db.insert("backgroundObjects",null,values);
   }
 
+
+
   /**
    *
    * @param name name of the file for the object
@@ -188,7 +190,7 @@ public class Doa {
       int imageHeight = asteroid.getInt("imageHeight");
 
       String[] stringKeys = {"name","image"};
-      String[] intKeys = {"imageWidth","imageHeight"};
+      String[] intKeys = {"imageWidth","imageHeight","id"};
       ContentValues values = getValues(stringKeys,intKeys,asteroid);
       long id = db.insert("asteroids",null,values);
 
@@ -215,14 +217,17 @@ public class Doa {
    * @return returns Set with all asteroids
    */
   public Set<Asteroid> getAsteroids(){
-    Cursor cursor = db.rawQuery("s",null);
-    try {
-      cursor.moveToFirst();
-//      while(cursor)
-    }catch (Exception e){
-
+    Set<Asteroid> asteroids = new HashSet();
+    JSONArray json = getJSONfromSQL("asteroids");
+    for(int i = 0; i < json.length(); i++){
+      try {
+        JSONObject asteroid = json.getJSONObject(i);
+        asteroids.add(new Asteroid(asteroid.getString("name"), asteroid.getString("image"), asteroid.getInt("imageWidth"), asteroid.getInt("imageHeight"), asteroid.getInt("id")));
+      }catch (Exception e){
+        e.printStackTrace();
+      }
     }
-    return null;
+    return asteroids;
   }
 
   /**
@@ -240,12 +245,45 @@ public class Doa {
 
   }
 
+  private Set<BackgroundObject> getBackgroundObjects(int level){
+    Set<BackgroundObject> backgroundObjects = new HashSet();
+    JSONArray json = getJSONfromSQL("levelObjects");
+    JSONArray filePaths = getJSONfromSQL("backgroundObjects");
+    for(int i = 0; i < json.length(); i++){
+      try {
+        JSONObject backgroundObject = json.getJSONObject(i);
+        if(backgroundObject.getInt("levelNumber") == level) {
+          String objectPath = "";
+          for(int j = 0; j < filePaths.length(); j++){
+            if(filePaths.getJSONObject(i).getInt("objectNumber") == i){
+              objectPath = filePaths.getJSONObject(i).getString("imagePath");
+            }
+          }
+          backgroundObjects.add(new BackgroundObject(backgroundObject.getString("position"), objectPath, backgroundObject.getDouble("scale")));
+        }
+      }catch (Exception e){
+        e.printStackTrace();
+        System.out.println("");
+      }
+    }
+    return backgroundObjects;
+  }
   /**
    *
    * @return returns set of all levels
    */
-  public Set<Level> getLevel(){
-    return null;
+  public Set<Level> getLevels(){
+    Set<Level> levels = new HashSet();
+    JSONArray json = getJSONfromSQL("levels");
+    for(int i = 0; i < json.length(); i++){
+      try {
+        JSONObject level = json.getJSONObject(i);
+        levels.add(new Level(level.getInt("levelNumber"), level.getString("title"), level.getString("hint"),level.getInt("width"),level.getInt("height"),level.getString("music"),this.getBackgroundObjects(level.getInt("levelNumber"))));
+      }catch (Exception e){
+        e.printStackTrace();
+      }
+    }
+    return levels;
   }
 
   /**
@@ -266,7 +304,17 @@ public class Doa {
    * @return returns set of all MainBodies
    */
   public Set<MainBody> getMainBodies(){
-    return null;
+    Set<MainBody> mainBodies = new HashSet();
+    JSONArray json = getJSONfromSQL("mainBodies");
+    for(int i = 0; i < json.length(); i++){
+      try {
+        JSONObject mainBody = json.getJSONObject(i);
+        mainBodies.add(new MainBody(mainBody.getString("cannonAttach"), mainBody.getString("engineAttach"), mainBody.getString("extraAttach"),mainBody.getString("image"), mainBody.getInt("imageWidth"), mainBody.getInt("imageHeight")));
+      }catch (Exception e){
+        e.printStackTrace();
+      }
+    }
+    return mainBodies;
   }
 
   /**
@@ -387,7 +435,7 @@ public class Doa {
    */
   public Set<ExtraPart> getExtraParts(){
     Set<ExtraPart> extraParts = new HashSet();
-    JSONArray json = getJSONfromSQL("cannons");
+    JSONArray json = getJSONfromSQL("extraParts");
     for(int i = 0; i < json.length(); i++){
       try {
         JSONObject newObject = json.getJSONObject(i);
@@ -418,7 +466,7 @@ public class Doa {
    */
   public Set<Engine> getEngines(){
     Set<Engine> engines = new HashSet();
-    JSONArray json = getJSONfromSQL("cannons");
+    JSONArray json = getJSONfromSQL("engines");
     for(int i = 0; i < json.length(); i++){
       try {
         JSONObject engine = json.getJSONObject(i);
@@ -444,8 +492,17 @@ public class Doa {
    *
    * @return Set of all PowerCores
    */
-  public Set<PowerCore> getPowerCores(){
-    return null;
+  public Set<PowerCore> getPowerCores() {
+    Set<PowerCore> powerCores = new HashSet();
+    JSONArray json = getJSONfromSQL("powerCores");
+    for (int i = 0; i < json.length(); i++) {
+      try {
+        JSONObject powerCore = json.getJSONObject(i);
+        powerCores.add(new PowerCore(powerCore.getInt("cannonBoost"),powerCore.getInt("engineBoost"), powerCore.getString("image")));
+      } catch (Exception e) {
+        e.printStackTrace();
+      }
+    }
+    return powerCores;
   }
-
 }
