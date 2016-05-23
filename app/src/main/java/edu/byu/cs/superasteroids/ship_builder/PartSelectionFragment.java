@@ -27,7 +27,7 @@ public class PartSelectionFragment extends FragmentView {
 	private ShipBuilderShipView gameView;
 	private PartsAdapter partsAdapter;
     private IShipBuildingView.PartSelectionView partView;
-    private View partChooserView;
+  static  private View partChooserView;
 
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 

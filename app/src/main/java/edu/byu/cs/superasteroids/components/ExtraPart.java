@@ -9,7 +9,7 @@ public class ExtraPart {
   private String image;
   private int imageWidth;
   private int imageHeight;
-
+  public int imageId;
   /**
    *
    * @param attachPoint point where it attaches

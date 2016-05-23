@@ -15,6 +15,7 @@ public class Cannon {
   private int attackImageHeight;
   private String attackSound;
   private int damage;
+  public int imageId;
 
   /**
    *

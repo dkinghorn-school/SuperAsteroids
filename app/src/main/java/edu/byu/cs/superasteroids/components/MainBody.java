@@ -11,6 +11,7 @@ public class MainBody {
   private String image;
   private int imageWidth;
   private int imageHeight;
+  public int imageId;
 
   /**
    *

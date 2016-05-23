@@ -8,6 +8,7 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.Set;
 
+import edu.byu.cs.superasteroids.AsteroidSingleton;
 import edu.byu.cs.superasteroids.Database.DbOpenHelper;
 import edu.byu.cs.superasteroids.Database.Doa;
 import edu.byu.cs.superasteroids.components.Asteroid;
@@ -65,13 +66,13 @@ public class GameDataImporter implements IGameDataImporter {
       addEngines(asteroidsJson.getJSONArray("engines"));
       addPowerCores(asteroidsJson.getJSONArray("powerCores"));
       addBackgroundObjects(asteroidsJson.getJSONArray("objects"));
-      Set<Cannon> cannons = doa.getCannons();
-      Set<ExtraPart> eps = doa.getExtraParts();
-      Set<Engine> engines = doa.getEngines();
-      Set<Asteroid> asteroids = doa.getAsteroids();
-      Set<Level> levels = doa.getLevels();
-      Set<MainBody> mainBodies = doa.getMainBodies();
-      Set<PowerCore> powerCores = doa.getPowerCores();
+      AsteroidSingleton.setCannons(doa.getCannons());
+      AsteroidSingleton.setExtraParts(doa.getExtraParts());
+      AsteroidSingleton.setEngines(doa.getEngines());
+      AsteroidSingleton.setAsteroids(doa.getAsteroids());
+      AsteroidSingleton.setLevels(doa.getLevels());
+      AsteroidSingleton.setMainBodies(doa.getMainBodies());
+      AsteroidSingleton.setPowerCores(doa.getPowerCores());
       System.out.println("l");
 
 

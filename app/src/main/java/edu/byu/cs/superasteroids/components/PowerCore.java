@@ -8,6 +8,7 @@ public class PowerCore {
   private int cannonBoost;
   private int engineBoost;
   private String image;
+  public int imageId;
 
   /**
    *

@@ -16,6 +16,7 @@ public class Level {
   private int height;
   private String music;
   private Set<BackgroundObject> backgroundObjects;
+  public int imageId;
 
   /**
    *
