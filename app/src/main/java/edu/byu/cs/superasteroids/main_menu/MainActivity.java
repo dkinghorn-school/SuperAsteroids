@@ -46,7 +46,7 @@ public class MainActivity extends ActionBarActivityView implements IMainMenuView
 
         DbOpenHelper dbOpenHelper = new DbOpenHelper(getBaseContext());
         SQLiteDatabase db = dbOpenHelper.getWritableDatabase();
-        dbOpenHelper.reset(db);
+//        dbOpenHelper.reset(db);
         Doa doa = Doa.createSingleton(db);
 
     }
