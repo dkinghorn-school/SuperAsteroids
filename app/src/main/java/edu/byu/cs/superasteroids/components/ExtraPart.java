@@ -2,20 +2,21 @@ package edu.byu.cs.superasteroids.components;
 
 import android.graphics.PointF;
 
+import edu.byu.cs.superasteroids.core.GraphicsUtils;
 import edu.byu.cs.superasteroids.drawing.DrawingHelper;
 
 /**
  * Also known as left wing,
  * Created by devonkinghorn on 5/16/16.
  */
-public class ExtraPart {
+public class ExtraPart extends IShipPart{
   private String attachPoint;
   private String image;
-  private int imageWidth;
-  private int imageHeight;
-  public int imageId;
-  public int attachX;
-  public int attachY;
+//  private int imageWidth;
+//  private int imageHeight;
+//  public int imageId;
+//  public int attachX;
+//  public int attachY;
 
   /**
    *
@@ -46,15 +47,5 @@ public class ExtraPart {
   public int getImageHeight() {
     return imageHeight;
   }
-  /**
-   * this draws the ship with the center of the ship
-   * @param point center of mainBody image
-   * @param rotation degree of rotation
-   * @param scale scale of the ship
-   */
-  public void draw(PointF point, int rotation, float scale){
-    float x = point.x+(imageWidth/2-attachX)*scale;
-    float y = point.y+(imageHeight/2-attachY)*scale;
-    DrawingHelper.drawImage(imageId,x,y,0,scale,scale,255);
-  }
+
 }

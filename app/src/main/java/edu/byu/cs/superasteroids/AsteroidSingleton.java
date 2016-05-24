@@ -31,10 +31,14 @@ public class AsteroidSingleton {
   public static ExtraPart extraPart;
   public static MainBody mainBody;
   public static PowerCore powerCore;
+  public static int spaceImage = -1;
+  public static Level level;
+  public static int levelNumber = 0;
 
   private static float scale = .5f;
-  private static int rotation = 0;
+  private static int rotation = 90;
   public static void drawShip(){
+
     float cannonAttachX = 190;
     float cannonAttachY = 227;
     float engineAttachX = 102;
@@ -43,32 +47,38 @@ public class AsteroidSingleton {
     float extraAttachY = 253;
     float shipCenterX = DrawingHelper.getGameViewWidth()/2;
     float shipCenterY = DrawingHelper.getGameViewHeight()/2;
+    PointF engineAttachPoint = new PointF(0,0);
+    PointF extraPartAttachPoint = new PointF(0,0);
     PointF center = new PointF(shipCenterX,shipCenterY);
-    int rotation = 0;
+    double radians = 0;
+//    int rotation = 0;
     if(powerCore != null){
 
       powerCore.draw(center,rotation,scale);
     }
     if(mainBody != null){
+      radians = GraphicsUtils.degreesToRadians(rotation);
       cannonAttachX = mainBody.cannonAttachX;
       cannonAttachY = mainBody.cannonAttachY;
       engineAttachX = mainBody.engineAttachX;
       engineAttachY = mainBody.engineAttachY;
       extraAttachX = mainBody.extraAttachX;
       extraAttachY = mainBody.extraAttachY;
+      engineAttachPoint = GraphicsUtils.rotate(new PointF(engineAttachX,engineAttachY),radians);
+      extraPartAttachPoint = GraphicsUtils.rotate(new PointF(extraAttachX,extraAttachY),radians);
       mainBody.draw(center,rotation, scale);
 //      DrawingHelper.drawImage(mainBody.imageId,shipCenterX,shipCenterY,0,scale,scale,255);
     }
     if(engine != null){
-      float x = center.x + engineAttachX*scale;
-      float y = center.y + engineAttachY*scale;
+      float x = center.x + engineAttachPoint.x*scale;
+      float y = center.y + engineAttachPoint.y*scale;
       PointF attachPoint = new PointF(x,y);
       engine.draw(attachPoint,rotation,scale);
 //      DrawingHelper.drawImage(engine.imageId,(shipCenterX+scale*engineAttachX), shipCenterY+scale*engineAttachY,0,scale,scale,255);
     }
     if(extraPart != null){
-      float a = center.x + extraAttachX*scale;
-      float b = center.y + extraAttachY*scale;
+      float a = center.x + extraPartAttachPoint.x*scale;
+      float b = center.y + extraPartAttachPoint.y*scale;
       extraPart.draw(new PointF(a,b),rotation,scale);
     }
     if(cannon != null){

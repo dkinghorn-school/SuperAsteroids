@@ -49,6 +49,47 @@ public class Level {
     }
     return false;
   }
+
+  public int getNumber() {
+    return number;
+  }
+
+  public String getTitle() {
+    return title;
+  }
+
+  public String getHint() {
+    return hint;
+  }
+
+  public int getWidth() {
+    return width;
+  }
+
+  public int getHeight() {
+    return height;
+  }
+
+  public String getMusic() {
+    return music;
+  }
+
+  public Set<BackgroundObject> getBackgroundObjects() {
+    return backgroundObjects;
+  }
+
+  public int getImageId() {
+    return imageId;
+  }
+
+  public int getAttachX() {
+    return attachX;
+  }
+
+  public int getAttachY() {
+    return attachY;
+  }
+
   public void setNumber(int number) {
     this.number = number;
   }

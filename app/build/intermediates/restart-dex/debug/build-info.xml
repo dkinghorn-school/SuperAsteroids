@@ -4,29 +4,46 @@
     api-level="23"
     density="420dpi"
     format="7"
-    timestamp="227278531932696" >
+    timestamp="233755790381906" >
 
     <task
         name="javac"
-        duration="192" />
+        duration="0" />
     <task
         name="instant-run-dex"
         duration="0" />
     <task
         name="instant-run-transform"
-        duration="120" />
+        duration="0" />
     <task
         name="verifier"
-        duration="33" />
-
-    <artifact
-        location="/Users/devonkinghorn/Documents/CS 240/SuperAsteroids/app/build/outputs/apk/app-debug.apk"
-        type="MAIN" />
+        duration="0" />
 
     <build timestamp="227278531932696" >
         <artifact
             location="/Users/devonkinghorn/Documents/CS 240/SuperAsteroids/app/build/outputs/apk/app-debug.apk"
             type="MAIN" />
     </build>
+    <build timestamp="228079153393262" >
+        <artifact
+            location="/Users/devonkinghorn/Documents/CS 240/SuperAsteroids/app/build/intermediates/transforms/dex/debug/folders/1000/5/slice_1/classes.dex"
+            type="DEX" />
+    </build>
+    <build timestamp="230122957129863" >
+        <artifact
+            location="/Users/devonkinghorn/Documents/CS 240/SuperAsteroids/app/build/intermediates/transforms/dex/debug/folders/1000/5/slice_9/classes.dex"
+            type="DEX" />
+    </build>
+    <build timestamp="233037078522690" >
+        <artifact
+            location="/Users/devonkinghorn/Documents/CS 240/SuperAsteroids/app/build/intermediates/transforms/dex/debug/folders/1000/5/slice_7/classes.dex"
+            type="DEX" />
+    </build>
+    <build timestamp="233702565796571" >
+        <artifact
+            location="/Users/devonkinghorn/Documents/CS 240/SuperAsteroids/app/build/intermediates/transforms/dex/debug/folders/1000/5/slice_6/classes.dex"
+            type="DEX" />
+    </build>
+    <build timestamp="233755790381906" />
 
 </instant-run>

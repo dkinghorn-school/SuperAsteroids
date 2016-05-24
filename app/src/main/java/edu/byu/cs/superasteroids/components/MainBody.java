@@ -72,7 +72,7 @@ public class MainBody {
    */
   public void draw(PointF point,int rotation, float scale){
 //    PointF offset = new PointF(point.x-scale*imageWidth/2,point.y-scale*imageWidth/2);
-    DrawingHelper.drawImage(imageId,point.x,point.y,0,scale,scale,255);
+    DrawingHelper.drawImage(imageId,point.x,point.y,rotation,scale,scale,255);
   }
 
 
