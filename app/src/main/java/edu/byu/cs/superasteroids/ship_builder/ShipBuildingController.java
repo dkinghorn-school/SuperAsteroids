@@ -39,7 +39,7 @@ public class ShipBuildingController implements IShipBuildingController {
     //leave empty
   }
   public void draw(){
-
+    AsteroidSingleton.drawShip();
     System.out.println();
   }
   public void setView(IView view){
@@ -102,35 +102,40 @@ public class ShipBuildingController implements IShipBuildingController {
     List<Integer> ids = new LinkedList();
     for(Engine eng : engines ){
       String image = eng.getImage();
-      ids.add(content.loadImage(image));
+      eng.imageId = content.loadImage(image);
+      ids.add(eng.imageId);
     }
     ((ShipBuildingActivity)this.context).setPartViewImageList(IShipBuildingView.PartSelectionView.ENGINE,ids);
 
     ids = new LinkedList();
     Set<MainBody> mainBodies = AsteroidSingleton.getMainBodies();
     for(MainBody mainBody : mainBodies){
-      ids.add(content.loadImage(mainBody.getImage()));
+      mainBody.imageId = content.loadImage(mainBody.getImage());
+      ids.add(mainBody.imageId);
     }
     ((ShipBuildingActivity)this.context).setPartViewImageList(IShipBuildingView.PartSelectionView.MAIN_BODY,ids);
 
     ids = new LinkedList();
     Set<ExtraPart> extraParts = AsteroidSingleton.getExtraParts();
     for(ExtraPart extraPart : extraParts){
-      ids.add(content.loadImage(extraPart.getImage()));
+      extraPart.imageId = content.loadImage(extraPart.getImage());
+      ids.add(extraPart.imageId);
     }
     ((ShipBuildingActivity)this.context).setPartViewImageList(IShipBuildingView.PartSelectionView.EXTRA_PART,ids);
 
     ids = new LinkedList<Integer>();
     Set<Cannon> cannons = AsteroidSingleton.getCannons();
     for(Cannon cannon: cannons){
-      ids.add(content.loadImage(cannon.getImage()));
+      cannon.imageId = content.loadImage(cannon.getImage());
+      ids.add(cannon.imageId);
     }
     ((ShipBuildingActivity)this.context).setPartViewImageList(IShipBuildingView.PartSelectionView.CANNON,ids);
 
     ids = new LinkedList<Integer>();
     Set<PowerCore> powerCores = AsteroidSingleton.getPowerCores();
     for(PowerCore powerCore : powerCores){
-      ids.add(content.loadImage(powerCore.getImage()));
+      powerCore.imageId = content.loadImage(powerCore.getImage());
+      ids.add(powerCore.imageId);
     }
     ((ShipBuildingActivity)this.context).setPartViewImageList(IShipBuildingView.PartSelectionView.POWER_CORE,ids);
 //    activity.setPartViewImageList(IShipBuildingView.PartSelectionView.ENGINE,ids);
@@ -191,10 +196,13 @@ public class ShipBuildingController implements IShipBuildingController {
         AsteroidSingleton.powerCore = (PowerCore) AsteroidSingleton.getPowerCores().toArray()[index];
         break;
     }
-    System.out.println();
+//    System.out.println();
+    if(AsteroidSingleton.powerCore != null && AsteroidSingleton.engine != null && AsteroidSingleton.cannon != null && AsteroidSingleton.extraPart != null && AsteroidSingleton.mainBody != null){
+      context.setStartGameButton(true);
+    }
   }
   public void onStartGamePressed(){
-    System.out.println();
+    context.startGame();
   }
   public void onResume(){
     System.out.println();

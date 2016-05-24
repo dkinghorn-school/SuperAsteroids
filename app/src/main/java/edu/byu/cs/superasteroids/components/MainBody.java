@@ -1,5 +1,9 @@
 package edu.byu.cs.superasteroids.components;
 
+import android.graphics.PointF;
+
+import edu.byu.cs.superasteroids.drawing.DrawingHelper;
+
 /**
  * center of spacecraft
  * Created by devonkinghorn on 5/16/16.
@@ -12,6 +16,12 @@ public class MainBody {
   private int imageWidth;
   private int imageHeight;
   public int imageId;
+  public float cannonAttachX;
+  public float cannonAttachY;
+  public float engineAttachX;
+  public float engineAttachY;
+  public float extraAttachX;
+  public float extraAttachY;
 
   /**
    *
@@ -54,6 +64,16 @@ public class MainBody {
     return imageHeight;
   }
 
+  /**
+   * this draws the ship with the center of the ship
+   * @param point center of mainBody image
+   * @param rotation degree of rotation
+   * @param scale scale of the ship
+   */
+  public void draw(PointF point,int rotation, float scale){
+//    PointF offset = new PointF(point.x-scale*imageWidth/2,point.y-scale*imageWidth/2);
+    DrawingHelper.drawImage(imageId,point.x,point.y,0,scale,scale,255);
+  }
 
 
 

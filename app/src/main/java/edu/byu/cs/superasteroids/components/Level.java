@@ -17,6 +17,8 @@ public class Level {
   private String music;
   private Set<BackgroundObject> backgroundObjects;
   public int imageId;
+  public int attachX;
+  public int attachY;
 
   /**
    *
