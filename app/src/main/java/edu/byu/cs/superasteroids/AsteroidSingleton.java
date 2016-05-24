@@ -35,9 +35,16 @@ public class AsteroidSingleton {
   public static Level level;
   public static int levelNumber = 0;
 
-  private static float scale = .5f;
-  private static int rotation = 90;
-  public static void drawShip(){
+  private static float scale = .2f;
+//  private static int rotation = 30;
+
+  /**
+   * draws the ship with all of its parts
+   * @param position where on the screen the ship should appear
+   * @param rotation degrees how rotated the ship is
+   * @param alpha the transparency of the ship
+   */
+  public static void drawShip(PointF position, int rotation, int alpha){
 
     float cannonAttachX = 190;
     float cannonAttachY = 227;
@@ -45,11 +52,13 @@ public class AsteroidSingleton {
     float engineAttachY = 392;
     float extraAttachX = 6;
     float extraAttachY = 253;
-    float shipCenterX = DrawingHelper.getGameViewWidth()/2;
-    float shipCenterY = DrawingHelper.getGameViewHeight()/2;
-    PointF engineAttachPoint = new PointF(0,0);
-    PointF extraPartAttachPoint = new PointF(0,0);
+    float shipCenterX = position.x;
+    float shipCenterY = position.y;
+
     PointF center = new PointF(shipCenterX,shipCenterY);
+    PointF engineAttachPoint = center;
+    PointF extraPartAttachPoint = center;
+    PointF cannonAttachPoint = center;
     double radians = 0;
 //    int rotation = 0;
     if(powerCore != null){
@@ -66,6 +75,7 @@ public class AsteroidSingleton {
       extraAttachY = mainBody.extraAttachY;
       engineAttachPoint = GraphicsUtils.rotate(new PointF(engineAttachX,engineAttachY),radians);
       extraPartAttachPoint = GraphicsUtils.rotate(new PointF(extraAttachX,extraAttachY),radians);
+      cannonAttachPoint = GraphicsUtils.rotate(new PointF(cannonAttachX,cannonAttachY),radians);
       mainBody.draw(center,rotation, scale);
 //      DrawingHelper.drawImage(mainBody.imageId,shipCenterX,shipCenterY,0,scale,scale,255);
     }
@@ -82,8 +92,8 @@ public class AsteroidSingleton {
       extraPart.draw(new PointF(a,b),rotation,scale);
     }
     if(cannon != null){
-      float a = center.x + cannonAttachX*scale;
-      float b = center.y + cannonAttachY*scale;
+      float a = center.x + cannonAttachPoint.x*scale;
+      float b = center.y + cannonAttachPoint.y*scale;
       cannon.draw(new PointF(a,b),rotation,scale);
     }
 

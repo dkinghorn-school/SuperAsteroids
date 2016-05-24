@@ -3,6 +3,7 @@ package edu.byu.cs.superasteroids.ship_builder;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.PointF;
 import android.widget.Switch;
 
 import java.util.HashSet;
@@ -21,6 +22,7 @@ import edu.byu.cs.superasteroids.components.Level;
 import edu.byu.cs.superasteroids.components.MainBody;
 import edu.byu.cs.superasteroids.components.PowerCore;
 import edu.byu.cs.superasteroids.content.ContentManager;
+import edu.byu.cs.superasteroids.drawing.DrawingHelper;
 import edu.byu.cs.superasteroids.ship_builder.IShipBuildingView.ViewDirection;
 /**
  * Created by devonkinghorn on 5/22/16.
@@ -39,7 +41,8 @@ public class ShipBuildingController implements IShipBuildingController {
     //leave empty
   }
   public void draw(){
-    AsteroidSingleton.drawShip();
+    PointF shipPosition = new PointF(DrawingHelper.getGameViewWidth()/2,DrawingHelper.getGameViewHeight()/2);
+    AsteroidSingleton.drawShip(shipPosition,0,255);
     System.out.println();
   }
   public void setView(IView view){

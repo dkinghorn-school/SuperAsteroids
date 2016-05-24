@@ -1,8 +1,14 @@
 package edu.byu.cs.superasteroids.components;
 
+import android.graphics.PointF;
+
 import org.json.JSONArray;
 
 import java.util.Set;
+
+import edu.byu.cs.superasteroids.AsteroidSingleton;
+import edu.byu.cs.superasteroids.drawing.DrawingHelper;
+import edu.byu.cs.superasteroids.drawing.LevelCoordinates;
 
 /**
  * This has all of the information about the specific level
@@ -34,9 +40,21 @@ public class Level {
     this.number = number;
     this.title = title;
     this.hint = hint;
+    this.height = height;
     this.width = width;
     this.music = music;
     this.backgroundObjects = backgroundObjects;
+  }
+  public void draw(){
+    LevelCoordinates.centerScreen(new PointF(1500,1500));
+    PointF center = new PointF(width/2,height/2);
+    PointF screenCoord = LevelCoordinates.convertCoordinatesToScreen(center);
+    float widthScale = ((float)width)/(float)2048;
+    float heightScale = ((float)height)/(float)2048;
+    DrawingHelper.drawImage(AsteroidSingleton.spaceImage, screenCoord.x, screenCoord.y , 0.0f, widthScale, heightScale, 255);
+    for(BackgroundObject obj: backgroundObjects){
+      obj.draw();
+    }
   }
   @Override
   public int hashCode(){
@@ -102,13 +120,13 @@ public class Level {
     this.hint = hint;
   }
 
-  public void setWidth(int width) {
-    this.width = width;
-  }
+//  public void setWidth(int width) {
+//    this.width = width;
+//  }
 
-  public void setHeight(int height) {
-    this.height = height;
-  }
+//  public void setHeight(int height) {
+//    this.height = height;
+//  }
 
   public void setMusic(String music) {
     this.music = music;
