@@ -101,6 +101,9 @@ public class ShipBuildingController implements IShipBuildingController {
     AsteroidSingleton.setExtraParts(doa.getExtraParts());
     AsteroidSingleton.setEngines(doa.getEngines());
     AsteroidSingleton.setAsteroids(doa.getAsteroids());
+    for(Asteroid aster: AsteroidSingleton.asteroids){
+      aster.imageId = content.loadImage(aster.getImage());
+    }
     AsteroidSingleton.setLevels(doa.getLevels());
     AsteroidSingleton.setMainBodies(doa.getMainBodies());
     AsteroidSingleton.setPowerCores(doa.getPowerCores());
@@ -143,9 +146,7 @@ public class ShipBuildingController implements IShipBuildingController {
       powerCore.imageId = content.loadImage(powerCore.getImage());
       ids.add(powerCore.imageId);
     }
-    for(Asteroid aster: AsteroidSingleton.asteroids){
-      aster.imageId = content.loadImage(aster.getImage());
-    }
+
     ((ShipBuildingActivity)this.context).setPartViewImageList(IShipBuildingView.PartSelectionView.POWER_CORE,ids);
 //    activity.setPartViewImageList(IShipBuildingView.PartSelectionView.ENGINE,ids);
 //    System.out.println('s');

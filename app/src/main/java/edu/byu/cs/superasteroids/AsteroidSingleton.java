@@ -132,6 +132,9 @@ public class AsteroidSingleton {
       String strarray[] = part.getAttachPoint().split(",");
       part.attachX = Integer.parseInt(strarray[0]);
       part.attachY = Integer.parseInt(strarray[1]);
+      strarray = part.getEmitPoint().split(",");
+      part.emit.x = Integer.parseInt(strarray[0]);
+      part.emit.y = Integer.parseInt(strarray[1]);
     }
     AsteroidSingleton.cannons = cannons;
   }

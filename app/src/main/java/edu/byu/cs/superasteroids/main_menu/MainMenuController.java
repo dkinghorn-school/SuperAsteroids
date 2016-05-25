@@ -29,14 +29,21 @@ public class MainMenuController implements IMainMenuController {
   //// TODO: 5/17/16
   public void onQuickPlayPressed(){
     Doa doa = Doa.getSingleton();
+    ContentManager content = ContentManager.getInstance();
+
     AsteroidSingleton.setCannons(doa.getCannons());
     AsteroidSingleton.setExtraParts(doa.getExtraParts());
     AsteroidSingleton.setEngines(doa.getEngines());
     AsteroidSingleton.setAsteroids(doa.getAsteroids());
+    for(Asteroid aster: AsteroidSingleton.asteroids){
+      if(aster.imageId == 0) {
+        aster.imageId = content.loadImage(aster.getImage());
+      }
+    }
     AsteroidSingleton.setLevels(doa.getLevels());
     AsteroidSingleton.setMainBodies(doa.getMainBodies());
     AsteroidSingleton.setPowerCores(doa.getPowerCores());
-    ContentManager content = ContentManager.getInstance();
+
 
     Set<Engine> engines = AsteroidSingleton.getEngines();
     List<Integer> ids = new LinkedList();

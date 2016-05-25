@@ -3,6 +3,10 @@ package edu.byu.cs.superasteroids.components;
 import android.graphics.PointF;
 import android.graphics.RectF;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Vector;
+
 import edu.byu.cs.superasteroids.core.GraphicsUtils;
 import edu.byu.cs.superasteroids.drawing.LevelCoordinates;
 /**
@@ -18,25 +22,44 @@ public class Ship {
   public int rotation; //degrees
   public RectF box = new RectF();
   private float scale = .2f;
-
+  private List<Bullet> bullets = new ArrayList();
   public Ship(Cannon cannon, Engine engine, ExtraPart extraPart, MainBody mainBody, PowerCore powerCore) {
     this.cannon = cannon;
     this.engine = engine;
     this.extraPart = extraPart;
     this.mainBody = mainBody;
     this.powerCore = powerCore;
+
   }
 
   public void turn(int degrees){
-    while(degrees < 0){
-      degrees += 360;
-    }
+//    while(degrees < -50){
+//      degrees += 360;
+//    }
     this.rotation = degrees;
+  }
+  private int recharge = 0;
+  public void fire(){
+    if(recharge <= 0) {
+      recharge = 2;
+      PointF bulletOrigin = new PointF();
+      double radians =  GraphicsUtils.degreesToRadians(rotation);
+
+      bulletOrigin.x = (mainBody.getImageWidth()/2 - mainBody.cannonAttachX + cannon.emit.x- cannon.attachX ) * scale;
+      bulletOrigin.y = (mainBody.getImageHeight()/2 -mainBody.cannonAttachY + cannon.emit.y- cannon.attachY ) * scale;
+      bulletOrigin = GraphicsUtils.rotate(bulletOrigin,radians);
+      bulletOrigin.x += position.x;// +
+      bulletOrigin.y += position.y;// +
+      bullets.add(new Bullet(bulletOrigin,rotation,cannon.getAttackImageWidth(),cannon.getAttackImageHeight()));
+
+    }
   }
   /**
    * moves the ship and updates the direction of the ship
    */
   public void move(){
+    if (recharge > 0)
+      recharge--;
     float left = position.x-scale*(mainBody.getImageWidth()/2-mainBody.extraAttachX) - scale*(extraPart.getImageWidth()-extraPart.attachX);
     float right = position.x + scale*(mainBody.getImageWidth()/2-mainBody.cannonAttachX) + scale*(cannon.getImageWidth() - cannon.attachX);
     float top = position.y - scale*(mainBody.getImageHeight()/2);
@@ -47,14 +70,18 @@ public class Ship {
     float radians = (float)GraphicsUtils.degreesToRadians(rotation);
     position.x = position.x + (float)engine.getBaseSpeed()*(float)Math.sin(radians)/10;
     position.y = position.y - (float)engine.getBaseSpeed()*(float)Math.cos(radians)/10;
-
+    for(Bullet bullet:bullets){
+      bullet.move();
+    }
   }
   /**
    * draws the ship with all of its parts
    * @param alpha the transparency of the ship
    */
   public void draw(int alpha){
-
+    for(Bullet bullet:bullets){
+      bullet.draw();
+    }
     float cannonAttachX;
     float cannonAttachY;
     float engineAttachX;

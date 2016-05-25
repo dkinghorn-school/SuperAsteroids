@@ -1,6 +1,11 @@
 package edu.byu.cs.superasteroids.components;
 
 import android.graphics.PointF;
+import android.graphics.RectF;
+
+import edu.byu.cs.superasteroids.core.GraphicsUtils;
+import edu.byu.cs.superasteroids.drawing.DrawingHelper;
+import edu.byu.cs.superasteroids.drawing.LevelCoordinates;
 
 /**
  * Created by devonkinghorn on 5/24/16.
@@ -14,8 +19,10 @@ public class AsteroidInstance {
    */
   public Asteroid asteroid;
 
-  public int velocity;
-
+  public int velocity = 13;
+  public int direction;
+  public float scale;
+  private RectF box = new RectF();
   /**
    * position in the map
    */
@@ -31,12 +38,23 @@ public class AsteroidInstance {
   }
 
   public void move(){
+    float left = position.x-scale*asteroid.getWidth()/2;
+    float right = position.x + scale*asteroid.getWidth()/2;
+    float top = position.y - scale*asteroid.getHeight()/2;
+    float bottom = position.y + scale*asteroid.getHeight()/2;
+    box.set(left,top,right,bottom);
+    direction = LevelCoordinates.checkCollision(box,direction);
 
+    float radians = (float) GraphicsUtils.degreesToRadians(direction);
+    position.x = position.x + velocity*(float)Math.sin(radians);
+    position.y = position.y - velocity*(float)Math.cos(radians);
   }
   /**
    * draws itself
    */
   public void draw(){
+    PointF screenCoordinates = LevelCoordinates.convertCoordinatesToScreen(position);
+    DrawingHelper.drawImage(asteroid.imageId,screenCoordinates.x,screenCoordinates.y,0,scale,scale,255);
 
   }
 }

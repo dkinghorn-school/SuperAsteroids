@@ -24,15 +24,19 @@ public class GameDelegate implements IGameDelegate {
   public void update(double elapsedTime) {
     PointF fingerPoint = InputManager.movePoint;
     if(fingerPoint != null){
-      PointF shipPos = LevelCoordinates.convertCoordinatesToScreen(ship.position);
-      fingerPoint.x = shipPos.x - fingerPoint.x;
-      fingerPoint.y = shipPos.y - fingerPoint.y;
-      double radians = Math.atan2(fingerPoint.x,fingerPoint.y);
+      if(InputManager.firePressed){
+        ship.fire();
+      } else {
+        PointF shipPos = LevelCoordinates.convertCoordinatesToScreen(ship.position);
+        fingerPoint.x = shipPos.x - fingerPoint.x;
+        fingerPoint.y = shipPos.y - fingerPoint.y;
+        double radians = Math.atan2(fingerPoint.x, fingerPoint.y);
 //      radians-=(3.14159/2);
-      ship.turn(-(int)GraphicsUtils.radiansToDegrees(radians));
+        ship.turn(-(int) GraphicsUtils.radiansToDegrees(radians));
+      }
     }
     ship.move();
-
+    level.moveAsteroids();
     System.out.println('s');
   }
 
@@ -60,7 +64,7 @@ public class GameDelegate implements IGameDelegate {
     ship = new Ship(AsteroidSingleton.cannon,AsteroidSingleton.engine,AsteroidSingleton.extraPart,AsteroidSingleton.mainBody,AsteroidSingleton.powerCore);
     ship.position = new PointF(LevelCoordinates.levelSize.x/2,LevelCoordinates.levelSize.y/2);
     ship.rotation = 0;
-
+    level.populateAsteroidField(ship.position);
 
   }
 

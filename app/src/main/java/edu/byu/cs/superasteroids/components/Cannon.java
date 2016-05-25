@@ -23,6 +23,7 @@ public class Cannon extends IShipPart{
 //  public int attachX;
 //  public int attachY;
   public PointF attach;
+  public PointF emit = new PointF();
 
   /**
    *

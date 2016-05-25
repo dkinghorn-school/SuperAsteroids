@@ -82,7 +82,7 @@ public class LevelCoordinates {
       if(angle > 90 && angle <= 180)
         return 180 - angle;
       if(angle < 270)
-        return 180 + angle;
+        return 270 + 270- angle;
     }
     return angle;
   }

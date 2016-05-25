@@ -57,7 +57,10 @@ public class Level {
     this.asteroids = asteroids;
   }
   public void populateAsteroidField(PointF shipLoc){
-
+    asteroidField.populate(new PointF(width,height),shipLoc,100);
+  }
+  public void moveAsteroids(){
+    asteroidField.move();
   }
   public void draw(){
     PointF center = new PointF(width/2,height/2);
@@ -68,6 +71,7 @@ public class Level {
     for(BackgroundObject obj: backgroundObjects){
       obj.draw();
     }
+    asteroidField.draw();
   }
   @Override
   public int hashCode(){
