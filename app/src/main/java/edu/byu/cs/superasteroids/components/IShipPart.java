@@ -16,14 +16,15 @@ public abstract class IShipPart {
   public int imageHeight;
   /**
    * this draws the ship with the center of the ship
+   * @param  alpha the transparency of the ship 0 is transparent
    * @param point center of mainBody image
    * @param rotation degree of rotation
    * @param scale scale of the ship
    */
-  public void draw(PointF point, int rotation, float scale){
+  public void draw(PointF point, int rotation, float scale, int alpha){
     PointF attachPoint = GraphicsUtils.rotate(new PointF(imageWidth/2-attachX,imageHeight/2-attachY),GraphicsUtils.degreesToRadians(rotation));
     float x = point.x+(attachPoint.x)*scale;
     float y = point.y+(attachPoint.y)*scale;
-    DrawingHelper.drawImage(imageId,(float)x,(float)y,rotation,scale,scale,255);
+    DrawingHelper.drawImage(imageId,(float)x,(float)y,rotation,scale,scale,alpha);
   }
 }

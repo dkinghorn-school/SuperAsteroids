@@ -7,6 +7,7 @@ import java.util.Set;
 import edu.byu.cs.superasteroids.AsteroidSingleton;
 import edu.byu.cs.superasteroids.Database.Doa;
 import edu.byu.cs.superasteroids.base.IView;
+import edu.byu.cs.superasteroids.components.Asteroid;
 import edu.byu.cs.superasteroids.components.Cannon;
 import edu.byu.cs.superasteroids.components.Engine;
 import edu.byu.cs.superasteroids.components.ExtraPart;
@@ -22,6 +23,7 @@ import edu.byu.cs.superasteroids.ship_builder.ShipBuildingActivity;
 public class MainMenuController implements IMainMenuController {
   MainActivity activity;
   public MainMenuController(MainActivity activity){
+
     this.activity = activity;
   }
   //// TODO: 5/17/16
@@ -40,36 +42,51 @@ public class MainMenuController implements IMainMenuController {
     List<Integer> ids = new LinkedList();
     for(Engine eng : engines ){
       String image = eng.getImage();
-      eng.imageId = content.loadImage(image);
+      if(eng.imageId == 0) {
+        eng.imageId = content.loadImage(image);
+      }
       ids.add(eng.imageId);
     }
 
     ids = new LinkedList();
     Set<MainBody> mainBodies = AsteroidSingleton.getMainBodies();
     for(MainBody mainBody : mainBodies){
-      mainBody.imageId = content.loadImage(mainBody.getImage());
+      if(mainBody.imageId == 0) {
+        mainBody.imageId = content.loadImage(mainBody.getImage());
+      }
       ids.add(mainBody.imageId);
     }
 
     ids = new LinkedList();
     Set<ExtraPart> extraParts = AsteroidSingleton.getExtraParts();
     for(ExtraPart extraPart : extraParts){
-      extraPart.imageId = content.loadImage(extraPart.getImage());
+      if(extraPart.imageId == 0) {
+        extraPart.imageId = content.loadImage(extraPart.getImage());
+      }
       ids.add(extraPart.imageId);
     }
 
     ids = new LinkedList<Integer>();
     Set<Cannon> cannons = AsteroidSingleton.getCannons();
     for(Cannon cannon: cannons){
-      cannon.imageId = content.loadImage(cannon.getImage());
+      if(cannon.imageId == 0) {
+        cannon.imageId = content.loadImage(cannon.getImage());
+      }
       ids.add(cannon.imageId);
     }
 
     ids = new LinkedList<Integer>();
     Set<PowerCore> powerCores = AsteroidSingleton.getPowerCores();
     for(PowerCore powerCore : powerCores){
-      powerCore.imageId = content.loadImage(powerCore.getImage());
+      if(powerCore.imageId == 0) {
+        powerCore.imageId = content.loadImage(powerCore.getImage());
+      }
       ids.add(powerCore.imageId);
+    }
+    for(Asteroid aster: AsteroidSingleton.asteroids){
+      if(aster.imageId == 0) {
+        aster.imageId = content.loadImage(aster.getImage());
+      }
     }
 
     AsteroidSingleton.mainBody = (MainBody)AsteroidSingleton.mainBodies.toArray()[0];

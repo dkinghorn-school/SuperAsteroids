@@ -12,24 +12,27 @@ public class AsteroidInstance {
   /**
    * this is the type of asteroid it is
    */
-  public Asteroid type;
+  public Asteroid asteroid;
 
   public int velocity;
 
   /**
    * position in the map
    */
-  PointF position;
+  public PointF position;
 
   /**
    *
-   * @param type the type of asteroid it is
+   * @param asteroid points to the type of asteroid it is
    */
-  public AsteroidInstance(Asteroid type) {
-    this.type = type;
+  public AsteroidInstance(Asteroid asteroid) {
+    this.asteroid = asteroid;
     timesDestroyed = 0;
   }
 
+  public void move(){
+
+  }
   /**
    * draws itself
    */

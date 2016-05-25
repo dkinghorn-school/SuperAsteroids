@@ -83,18 +83,18 @@ public class AsteroidSingleton {
       float x = center.x + engineAttachPoint.x*scale;
       float y = center.y + engineAttachPoint.y*scale;
       PointF attachPoint = new PointF(x,y);
-      engine.draw(attachPoint,rotation,scale);
+      engine.draw(attachPoint,rotation,scale,255);
 //      DrawingHelper.drawImage(engine.imageId,(shipCenterX+scale*engineAttachX), shipCenterY+scale*engineAttachY,0,scale,scale,255);
     }
     if(extraPart != null){
       float a = center.x + extraPartAttachPoint.x*scale;
       float b = center.y + extraPartAttachPoint.y*scale;
-      extraPart.draw(new PointF(a,b),rotation,scale);
+      extraPart.draw(new PointF(a,b),rotation,scale,255);
     }
     if(cannon != null){
       float a = center.x + cannonAttachPoint.x*scale;
       float b = center.y + cannonAttachPoint.y*scale;
-      cannon.draw(new PointF(a,b),rotation,scale);
+      cannon.draw(new PointF(a,b),rotation,scale,255);
     }
 
   }

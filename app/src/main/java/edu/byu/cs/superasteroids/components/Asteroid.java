@@ -10,7 +10,9 @@ public class Asteroid {
   private String image;
   private int width;
   private int height;
-  private int id;
+  public int imageId;
+  public int id;
+
   /**
    *
    * @param name name of asteroid
@@ -25,6 +27,7 @@ public class Asteroid {
     this.height = height;
     this.id = id;
   }
+  public Asteroid(){}
 
   /**
    *

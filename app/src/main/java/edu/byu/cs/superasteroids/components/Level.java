@@ -25,7 +25,8 @@ public class Level {
   public int imageId;
   public int attachX;
   public int attachY;
-
+  public Set<AsteroidInstance> asteroids;
+  public AsteroidField asteroidField;
   /**
    *
    * @param number level number
@@ -45,8 +46,20 @@ public class Level {
     this.music = music;
     this.backgroundObjects = backgroundObjects;
   }
+  public Level(int number, String title, String hint, int width, int height, String music, Set<BackgroundObject> backgroundObjects, Set<AsteroidInstance> asteroids){
+    this.number = number;
+    this.title = title;
+    this.hint = hint;
+    this.height = height;
+    this.width = width;
+    this.music = music;
+    this.backgroundObjects = backgroundObjects;
+    this.asteroids = asteroids;
+  }
+  public void populateAsteroidField(PointF shipLoc){
+
+  }
   public void draw(){
-    LevelCoordinates.centerScreen(new PointF(1500,1500));
     PointF center = new PointF(width/2,height/2);
     PointF screenCoord = LevelCoordinates.convertCoordinatesToScreen(center);
     float widthScale = ((float)width)/(float)2048;

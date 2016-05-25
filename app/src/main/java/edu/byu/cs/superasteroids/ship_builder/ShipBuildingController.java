@@ -38,6 +38,9 @@ public class ShipBuildingController implements IShipBuildingController {
 
   }
   public void update(double d){
+    if(AsteroidSingleton.powerCore != null && AsteroidSingleton.engine != null && AsteroidSingleton.cannon != null && AsteroidSingleton.extraPart != null && AsteroidSingleton.mainBody != null){
+      context.setStartGameButton(true);
+    }
     //leave empty
   }
   public void draw(){
@@ -140,6 +143,9 @@ public class ShipBuildingController implements IShipBuildingController {
       powerCore.imageId = content.loadImage(powerCore.getImage());
       ids.add(powerCore.imageId);
     }
+    for(Asteroid aster: AsteroidSingleton.asteroids){
+      aster.imageId = content.loadImage(aster.getImage());
+    }
     ((ShipBuildingActivity)this.context).setPartViewImageList(IShipBuildingView.PartSelectionView.POWER_CORE,ids);
 //    activity.setPartViewImageList(IShipBuildingView.PartSelectionView.ENGINE,ids);
 //    System.out.println('s');
@@ -200,14 +206,14 @@ public class ShipBuildingController implements IShipBuildingController {
         break;
     }
 //    System.out.println();
-    if(AsteroidSingleton.powerCore != null && AsteroidSingleton.engine != null && AsteroidSingleton.cannon != null && AsteroidSingleton.extraPart != null && AsteroidSingleton.mainBody != null){
-      context.setStartGameButton(true);
-    }
+
   }
   public void onStartGamePressed(){
+    AsteroidSingleton.levelNumber = 0;
     context.startGame();
   }
   public void onResume(){
+    AsteroidSingleton.levelNumber = 0;
     System.out.println();
   }
 }

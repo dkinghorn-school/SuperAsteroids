@@ -11,8 +11,11 @@ import org.json.JSONObject;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
+import java.util.TreeSet;
 
 import edu.byu.cs.superasteroids.components.Asteroid;
+import edu.byu.cs.superasteroids.components.AsteroidField;
+import edu.byu.cs.superasteroids.components.AsteroidInstance;
 import edu.byu.cs.superasteroids.components.BackgroundObject;
 import edu.byu.cs.superasteroids.components.Cannon;
 import edu.byu.cs.superasteroids.components.Engine;
@@ -268,6 +271,34 @@ public class Doa {
     }
     return backgroundObjects;
   }
+
+  private AsteroidField getLevelAsteroids(int level){
+    AsteroidField field = new AsteroidField();
+    Set<Asteroid> asteroidTypes = getAsteroids();
+    JSONArray json = getJSONfromSQL("levelAsteroids","levelNumber",Integer.toString(level));
+    for (int i = 0; i < json.length(); i++) {
+
+      try {
+        JSONObject asteroid = json.getJSONObject(i);
+//        Asteroid[] asteroids = (Asteroid[])asteroidTypes.toArray();
+        Asteroid correctAsteroid = new Asteroid();// = asteroids[0];
+        for(Asteroid aster: asteroidTypes){
+          if(asteroid.getInt("asteroidId") == aster.id){
+            correctAsteroid = aster;
+          }
+        }
+        if(correctAsteroid.getName() != null) {
+          int numberToCopy = asteroid.getInt("number");
+          for (int j = 0; j < numberToCopy; j++) {
+            field.add(new AsteroidInstance(correctAsteroid));
+          }
+        }
+      } catch (Exception e) {
+        e.printStackTrace();
+      }
+    }
+    return field;
+  }
   /**
    *
    * @return returns set of all levels
@@ -278,7 +309,9 @@ public class Doa {
     for(int i = 0; i < json.length(); i++){
       try {
         JSONObject level = json.getJSONObject(i);
-        levels.add(new Level(level.getInt("levelNumber"), level.getString("title"), level.getString("hint"),level.getInt("width"),level.getInt("height"),level.getString("music"),this.getBackgroundObjects(level.getInt("levelNumber"))));
+        Level myLevel = new Level(level.getInt("levelNumber"), level.getString("title"), level.getString("hint"),level.getInt("width"),level.getInt("height"),level.getString("music"),this.getBackgroundObjects(level.getInt("levelNumber")));
+        myLevel.asteroidField = getLevelAsteroids(level.getInt("levelNumber"));
+        levels.add(myLevel);
       }catch (Exception e){
         e.printStackTrace();
       }
@@ -386,6 +419,48 @@ public class Doa {
               rowObject.put(cursor.getColumnName(i) ,  cursor.getString(i) );
             }
              else
+            {
+              rowObject.put( cursor.getColumnName(i) ,  cursor.getInt(i) );
+            }
+          }
+          catch( Exception e )
+          {
+            e.printStackTrace();
+          }
+        }
+      }
+      resultSet.put(rowObject);
+      cursor.moveToNext();
+    }
+    cursor.close();
+//    Log.d("TAG_NAME", resultSet.toString() );
+    return resultSet;
+  }
+  /**
+   *
+   * @return Set of all cannons
+   */
+  private JSONArray getJSONfromSQL(String table, String field, String value){
+    String query = "select * from " + table + " where " + field + " = " + value + ";";
+    JSONArray resultSet     = new JSONArray();
+    Cursor cursor = db.rawQuery(query,null);
+    cursor.moveToFirst();
+    while (cursor.isAfterLast() == false) {
+
+      int totalColumn = cursor.getColumnCount();
+      JSONObject rowObject = new JSONObject();
+
+      for( int i=0 ;  i< totalColumn ; i++ )
+      {
+        if( cursor.getColumnName(i) != null )
+        {
+          try
+          {
+            if( cursor.getString(i) != null )
+            {
+              rowObject.put(cursor.getColumnName(i) ,  cursor.getString(i) );
+            }
+            else
             {
               rowObject.put( cursor.getColumnName(i) ,  cursor.getInt(i) );
             }
