@@ -1,60 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <instant-run
-    abi="x86_64,x86"
-    api-level="23"
-    density="420dpi"
+    abi="armeabi-v7a,armeabi"
+    api-level="19"
+    density="xhdpi"
     format="7"
-    timestamp="263676768737514" >
+    timestamp="271779019438683" >
 
     <task
         name="javac"
-        duration="58" />
+        duration="0" />
     <task
         name="instant-run-dex"
         duration="0" />
     <task
         name="instant-run-transform"
-        duration="4" />
+        duration="0" />
     <task
         name="verifier"
         duration="0" />
 
-    <artifact
-        location="/Users/devonkinghorn/Documents/CS 240/SuperAsteroids/app/build/intermediates/transforms/dex/debug/folders/1000/5/slice_6/classes.dex"
-        type="DEX" />
-
-    <build timestamp="257579467245019" >
-        <artifact
-            location="/Users/devonkinghorn/Documents/CS 240/SuperAsteroids/app/build/outputs/apk/app-debug.apk"
-            type="MAIN" />
-    </build>
-    <build timestamp="258526817240540" >
-        <artifact
-            location="/Users/devonkinghorn/Documents/CS 240/SuperAsteroids/app/build/intermediates/transforms/dex/debug/folders/1000/5/slice_2/classes.dex"
-            type="DEX" />
-        <artifact
-            location="/Users/devonkinghorn/Documents/CS 240/SuperAsteroids/app/build/intermediates/transforms/dex/debug/folders/1000/5/slice_1/classes.dex"
-            type="DEX" />
-    </build>
-    <build timestamp="258905438147915" >
-        <artifact
-            location="/Users/devonkinghorn/Documents/CS 240/SuperAsteroids/app/build/intermediates/transforms/dex/debug/folders/1000/5/slice_0/classes.dex"
-            type="DEX" />
-    </build>
-    <build timestamp="261559687247836" >
-        <artifact
-            location="/Users/devonkinghorn/Documents/CS 240/SuperAsteroids/app/build/intermediates/transforms/dex/debug/folders/1000/5/slice_7/classes.dex"
-            type="DEX" />
-    </build>
-    <build timestamp="262851807984774" >
-        <artifact
-            location="/Users/devonkinghorn/Documents/CS 240/SuperAsteroids/app/build/intermediates/transforms/dex/debug/folders/1000/5/slice_9/classes.dex"
-            type="DEX" />
-    </build>
-    <build timestamp="263676768737514" >
-        <artifact
-            location="/Users/devonkinghorn/Documents/CS 240/SuperAsteroids/app/build/intermediates/transforms/dex/debug/folders/1000/5/slice_6/classes.dex"
-            type="DEX" />
-    </build>
+    <build timestamp="271779019438683" />
 
 </instant-run>

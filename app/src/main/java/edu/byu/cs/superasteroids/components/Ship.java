@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 
+import edu.byu.cs.superasteroids.content.ContentManager;
 import edu.byu.cs.superasteroids.core.GraphicsUtils;
 import edu.byu.cs.superasteroids.drawing.LevelCoordinates;
 /**
@@ -22,7 +23,8 @@ public class Ship {
   public int rotation; //degrees
   public RectF box = new RectF();
   private float scale = .2f;
-  private List<Bullet> bullets = new ArrayList();
+  public List<Bullet> bullets = new ArrayList();
+
   public Ship(Cannon cannon, Engine engine, ExtraPart extraPart, MainBody mainBody, PowerCore powerCore) {
     this.cannon = cannon;
     this.engine = engine;
@@ -36,12 +38,13 @@ public class Ship {
 //    while(degrees < -50){
 //      degrees += 360;
 //    }
+
     this.rotation = degrees;
   }
   private int recharge = 0;
   public void fire(){
     if(recharge <= 0) {
-      recharge = 2;
+      recharge = 5;
       PointF bulletOrigin = new PointF();
       double radians =  GraphicsUtils.degreesToRadians(rotation);
 
@@ -51,7 +54,7 @@ public class Ship {
       bulletOrigin.x += position.x;// +
       bulletOrigin.y += position.y;// +
       bullets.add(new Bullet(bulletOrigin,rotation,cannon.getAttackImageWidth(),cannon.getAttackImageHeight()));
-
+      ContentManager.getInstance().playSound(cannon.soundId,1,1);
     }
   }
   /**
@@ -68,8 +71,8 @@ public class Ship {
     rotation = LevelCoordinates.checkCollision(box,rotation);
 
     float radians = (float)GraphicsUtils.degreesToRadians(rotation);
-    position.x = position.x + (float)engine.getBaseSpeed()*(float)Math.sin(radians)/10;
-    position.y = position.y - (float)engine.getBaseSpeed()*(float)Math.cos(radians)/10;
+    position.x = position.x + (float)engine.getBaseSpeed()*(float)Math.sin(radians)/30;
+    position.y = position.y - (float)engine.getBaseSpeed()*(float)Math.cos(radians)/30;
     for(Bullet bullet:bullets){
       bullet.move();
     }

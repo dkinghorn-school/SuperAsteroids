@@ -136,6 +136,11 @@ public class ShipBuildingController implements IShipBuildingController {
     Set<Cannon> cannons = AsteroidSingleton.getCannons();
     for(Cannon cannon: cannons){
       cannon.imageId = content.loadImage(cannon.getImage());
+      try{
+      cannon.soundId = content.loadSound(cannon.getAttackSound());
+      }catch(Exception e){
+        e.printStackTrace();
+      }
       ids.add(cannon.imageId);
     }
     ((ShipBuildingActivity)this.context).setPartViewImageList(IShipBuildingView.PartSelectionView.CANNON,ids);

@@ -19,10 +19,10 @@ public class AsteroidInstance {
    */
   public Asteroid asteroid;
 
-  public int velocity = 13;
+  public int velocity = 7;
   public int direction;
   public float scale;
-  private RectF box = new RectF();
+  public RectF box = new RectF();
   /**
    * position in the map
    */
@@ -49,6 +49,8 @@ public class AsteroidInstance {
     position.x = position.x + velocity*(float)Math.sin(radians);
     position.y = position.y - velocity*(float)Math.cos(radians);
   }
+
+
   /**
    * draws itself
    */

@@ -24,6 +24,7 @@ public class Cannon extends IShipPart{
 //  public int attachY;
   public PointF attach;
   public PointF emit = new PointF();
+  public int soundId;
 
   /**
    *

@@ -1,8 +1,10 @@
 package edu.byu.cs.superasteroids.components;
 
 import android.graphics.PointF;
+import android.graphics.RectF;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
@@ -33,6 +35,33 @@ public class AsteroidField {
 
     }
   }
+//  public boolean asteroidCollision(RectF spaceObject){
+//    Iterator<AsteroidInstance> iterator = asteroids.iterator();
+//    while(iterator.hasNext()){
+//
+//      if(iterator.next().box.intersect(spaceObject)){
+//          switch(iterator.next().asteroid.getName()) {
+//            case "octeroid":
+//              if(iterator.next().timesDestroyed == 1){
+//                iterator.remove();
+//              }else {
+//                iterator.next()
+//              }
+//
+//                break;
+//            case "growing":
+//
+//              break;
+//            default:
+//          }
+//
+//
+//        return true;
+//      }
+//    }
+//    return false;
+//
+//  }
   /**
    * moves every asteroid in the level
    */

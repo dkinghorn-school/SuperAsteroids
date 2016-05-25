@@ -1,6 +1,7 @@
 package edu.byu.cs.superasteroids.components;
 
 import android.graphics.PointF;
+import android.graphics.RectF;
 
 import org.json.JSONArray;
 
@@ -22,11 +23,13 @@ public class Level {
   private int height;
   private String music;
   private Set<BackgroundObject> backgroundObjects;
+  public int musicId;
   public int imageId;
   public int attachX;
   public int attachY;
   public Set<AsteroidInstance> asteroids;
   public AsteroidField asteroidField;
+
   /**
    *
    * @param number level number
@@ -61,6 +64,9 @@ public class Level {
   }
   public void moveAsteroids(){
     asteroidField.move();
+  }
+  public boolean asteroidCollision(RectF spaceObject){
+    return false;//asteroidField.asteroidCollision(spaceObject);
   }
   public void draw(){
     PointF center = new PointF(width/2,height/2);

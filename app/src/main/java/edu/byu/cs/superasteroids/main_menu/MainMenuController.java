@@ -78,6 +78,11 @@ public class MainMenuController implements IMainMenuController {
     for(Cannon cannon: cannons){
       if(cannon.imageId == 0) {
         cannon.imageId = content.loadImage(cannon.getImage());
+        try{
+          cannon.soundId = content.loadSound(cannon.getAttackSound());
+        }catch(Exception e){
+          e.printStackTrace();
+        }
       }
       ids.add(cannon.imageId);
     }
