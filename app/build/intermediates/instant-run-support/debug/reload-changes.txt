@@ -1,6 +1,0 @@
-CHANGED,/Users/devonkinghorn/Documents/CS 240/SuperAsteroids/app/build/intermediates/transforms/instantRun/debug/folders/4000/5/enhanced/edu/byu/cs/superasteroids/components/AsteroidInstance$override.class
-CHANGED,/Users/devonkinghorn/Documents/CS 240/SuperAsteroids/app/build/intermediates/transforms/instantRun/debug/folders/4000/5/enhanced/edu/byu/cs/superasteroids/components/Ship$override.class
-CHANGED,/Users/devonkinghorn/Documents/CS 240/SuperAsteroids/app/build/intermediates/transforms/instantRun/debug/folders/4000/5/enhanced/com/android/tools/fd/runtime/AppPatchesLoaderImpl.class
-CHANGED,/Users/devonkinghorn/Documents/CS 240/SuperAsteroids/app/build/intermediates/transforms/instantRun/debug/folders/4000/5/enhanced/edu/byu/cs/superasteroids/components/AsteroidField$override.class
-CHANGED,/Users/devonkinghorn/Documents/CS 240/SuperAsteroids/app/build/intermediates/transforms/instantRun/debug/folders/4000/5/enhanced/edu/byu/cs/superasteroids/base/GameDelegate$override.class
-CHANGED,/Users/devonkinghorn/Documents/CS 240/SuperAsteroids/app/build/intermediates/transforms/instantRun/debug/folders/4000/5/enhanced/edu/byu/cs/superasteroids/components/Level$override.class

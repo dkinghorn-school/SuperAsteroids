@@ -3,6 +3,8 @@ package edu.byu.cs.superasteroids.base;
 import android.graphics.PointF;
 import android.graphics.Rect;
 
+import java.util.Iterator;
+
 import edu.byu.cs.superasteroids.AsteroidSingleton;
 import edu.byu.cs.superasteroids.components.BackgroundObject;
 import edu.byu.cs.superasteroids.components.Bullet;
@@ -20,6 +22,8 @@ import edu.byu.cs.superasteroids.game.InputManager;
 public class GameDelegate implements IGameDelegate {
   Ship ship;
   PointF shipPosition;
+  int lives;
+  int safetyTimeout;
   private Level level;
   @Override
   public void update(double elapsedTime) {
@@ -40,14 +44,30 @@ public class GameDelegate implements IGameDelegate {
     }
     ship.move();
     level.moveAsteroids();
-    for(Bullet bullet:ship.bullets){
-
+    Iterator<Bullet> bulletIter = ship.bullets.iterator();
+    while(bulletIter.hasNext()){
+      Bullet bullet = bulletIter.next();
+      if(level.asteroidCollision(bullet.position)){
+        ship.bullets.remove(bullet);
+      }
     }
-    System.out.println('s');
+    if(safetyTimeout == 0){
+      if(level.asteroidCollision(ship.box)){
+        lives--;
+        safetyTimeout = 180;
+      }
+    } else {
+      safetyTimeout--;
+    }
+    if(level.asteroidField.asteroids.isEmpty()){
+      loadContent(ContentManager.getInstance());
+    }
   }
 
   @Override
   public void loadContent(ContentManager content) {
+    lives = 3;
+    safetyTimeout = 0;
     if(AsteroidSingleton.spaceImage == -1){
       AsteroidSingleton.spaceImage = content.loadImage("images/space.bmp");
       for(Level level: AsteroidSingleton.levels){
@@ -105,7 +125,7 @@ public class GameDelegate implements IGameDelegate {
   public void draw() {
     LevelCoordinates.centerScreen(ship.position);
     level.draw();
-    ship.draw(255);
+    ship.draw((safetyTimeout == 0?255:150));
     System.out.println('s');
   }
 }

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<instant-run
+    abi="x86_64,x86"
+    api-level="23"
+    density="420dpi"
+    format="7"
+    timestamp="281356966890253" >
+
+    <task
+        name="javac"
+        duration="218" />
+    <task
+        name="instant-run-dex"
+        duration="0" />
+    <task
+        name="instant-run-transform"
+        duration="135" />
+    <task
+        name="verifier"
+        duration="34" />
+
+    <artifact
+        location="/Users/devonkinghorn/Documents/CS 240/SuperAsteroids/app/build/intermediates/res/resources-debug.ap_"
+        type="RESOURCES" />
+    <artifact
+        location="/Users/devonkinghorn/Documents/CS 240/SuperAsteroids/app/build/intermediates/res/resources-debug.ap_"
+        type="RESOURCES" />
+    <artifact
+        location="/Users/devonkinghorn/Documents/CS 240/SuperAsteroids/app/build/intermediates/transforms/dex/debug/folders/1000/5/slice_5/classes.dex"
+        type="DEX" />
+    <artifact
+        location="/Users/devonkinghorn/Documents/CS 240/SuperAsteroids/app/build/intermediates/transforms/dex/debug/folders/1000/2/json-simple-1.1.1_5b99a4a1af83a80d5ed23b05d20c86b212511b4e/classes.dex"
+        type="DEX" />
+    <artifact
+        location="/Users/devonkinghorn/Documents/CS 240/SuperAsteroids/app/build/intermediates/transforms/dex/debug/folders/1000/5/slice_4/classes.dex"
+        type="DEX" />
+    <artifact
+        location="/Users/devonkinghorn/Documents/CS 240/SuperAsteroids/app/build/intermediates/transforms/dex/debug/folders/1000/5/slice_6/classes.dex"
+        type="DEX" />
+    <artifact
+        location="/Users/devonkinghorn/Documents/CS 240/SuperAsteroids/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_d84e6f8b521112af91bc0297d18ce0a03fdaabb0/classes.dex"
+        type="DEX" />
+    <artifact
+        location="/Users/devonkinghorn/Documents/CS 240/SuperAsteroids/app/build/intermediates/transforms/dex/debug/folders/1000/5/slice_3/classes.dex"
+        type="DEX" />
+    <artifact
+        location="/Users/devonkinghorn/Documents/CS 240/SuperAsteroids/app/build/intermediates/transforms/dex/debug/folders/1000/5/slice_7/classes.dex"
+        type="DEX" />
+    <artifact
+        location="/Users/devonkinghorn/Documents/CS 240/SuperAsteroids/app/build/intermediates/transforms/dex/debug/folders/1000/5/slice_9/classes.dex"
+        type="DEX" />
+    <artifact
+        location="/Users/devonkinghorn/Documents/CS 240/SuperAsteroids/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-appcompat-v7-19.1.0_b2f1aa8e4c8efe5297ba0e5bdc7405029955e55c/classes.dex"
+        type="DEX" />
+    <artifact
+        location="/Users/devonkinghorn/Documents/CS 240/SuperAsteroids/app/build/intermediates/transforms/dex/debug/folders/1000/5/slice_8/classes.dex"
+        type="DEX" />
+    <artifact
+        location="/Users/devonkinghorn/Documents/CS 240/SuperAsteroids/app/build/intermediates/transforms/dex/debug/folders/1000/10/support-v4-19.1.0_ea131420d7bb780ac047ea40183f21c1e8f5b4bd/classes.dex"
+        type="DEX" />
+    <artifact
+        location="/Users/devonkinghorn/Documents/CS 240/SuperAsteroids/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_4e8eb8da83c762c53f830033786bb0ea61103c19/classes.dex"
+        type="DEX" />
+    <artifact
+        location="/Users/devonkinghorn/Documents/CS 240/SuperAsteroids/app/build/intermediates/transforms/dex/debug/folders/1000/5/slice_2/classes.dex"
+        type="DEX" />
+    <artifact
+        location="/Users/devonkinghorn/Documents/CS 240/SuperAsteroids/app/build/intermediates/transforms/dex/debug/folders/1000/5/slice_1/classes.dex"
+        type="DEX" />
+    <artifact
+        location="/Users/devonkinghorn/Documents/CS 240/SuperAsteroids/app/build/intermediates/transforms/dex/debug/folders/1000/5/slice_0/classes.dex"
+        type="DEX" />
+
+</instant-run>

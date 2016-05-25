@@ -66,7 +66,11 @@ public class Level {
     asteroidField.move();
   }
   public boolean asteroidCollision(RectF spaceObject){
-    return false;//asteroidField.asteroidCollision(spaceObject);
+    return asteroidField.asteroidCollision(spaceObject);
+  }
+  public boolean asteroidCollision(PointF spaceObject){
+    RectF spaceBox = new RectF(spaceObject.x,spaceObject.y,spaceObject.x,spaceObject.y);
+    return asteroidField.asteroidCollision(spaceBox);
   }
   public void draw(){
     PointF center = new PointF(width/2,height/2);

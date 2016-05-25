@@ -48,6 +48,10 @@ public class AsteroidInstance {
     float radians = (float) GraphicsUtils.degreesToRadians(direction);
     position.x = position.x + velocity*(float)Math.sin(radians);
     position.y = position.y - velocity*(float)Math.cos(radians);
+
+    if(asteroid.getName().equals("growing") && scale < 2){
+      scale += .01;
+    }
   }
 
 

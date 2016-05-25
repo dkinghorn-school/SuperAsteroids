@@ -4,6 +4,7 @@ import android.graphics.PointF;
 import android.graphics.RectF;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Vector;
 
@@ -34,12 +35,22 @@ public class Ship {
 
   }
 
-  public void turn(int degrees){
-//    while(degrees < -50){
-//      degrees += 360;
-//    }
-
-    this.rotation = degrees;
+  public void turn(int inputDegrees){
+    int degreesDifference = inputDegrees - rotation;
+    while(degreesDifference < 0){
+      degreesDifference+=360;
+    }
+    if(degreesDifference<180){
+      rotation += 5;
+    } else {
+      rotation -= 5;
+    }
+    while(rotation < 0){
+      rotation += 360;
+    }
+    while(rotation >= 360){
+      rotation -= 360;
+    }
   }
   private int recharge = 0;
   public void fire(){
@@ -48,8 +59,8 @@ public class Ship {
       PointF bulletOrigin = new PointF();
       double radians =  GraphicsUtils.degreesToRadians(rotation);
 
-      bulletOrigin.x = (mainBody.getImageWidth()/2 - mainBody.cannonAttachX + cannon.emit.x- cannon.attachX ) * scale;
-      bulletOrigin.y = (mainBody.getImageHeight()/2 -mainBody.cannonAttachY + cannon.emit.y- cannon.attachY ) * scale;
+      bulletOrigin.x = ( mainBody.cannonAttachX + cannon.emit.x- cannon.attachX ) * scale;
+      bulletOrigin.y = ( mainBody.cannonAttachY + cannon.emit.y- cannon.attachY ) * scale;
       bulletOrigin = GraphicsUtils.rotate(bulletOrigin,radians);
       bulletOrigin.x += position.x;// +
       bulletOrigin.y += position.y;// +
@@ -59,6 +70,7 @@ public class Ship {
   }
   /**
    * moves the ship and updates the direction of the ship
+   * also moves the bullets
    */
   public void move(){
     if (recharge > 0)
@@ -70,11 +82,23 @@ public class Ship {
     box.set(left,top,right,bottom);
     rotation = LevelCoordinates.checkCollision(box,rotation);
 
+
+    //updates position of the ship
     float radians = (float)GraphicsUtils.degreesToRadians(rotation);
     position.x = position.x + (float)engine.getBaseSpeed()*(float)Math.sin(radians)/30;
     position.y = position.y - (float)engine.getBaseSpeed()*(float)Math.cos(radians)/30;
+     //This moves the bullets
     for(Bullet bullet:bullets){
       bullet.move();
+    }
+
+    //This removes bullets outside of the level
+    Iterator<Bullet> bulletIter = bullets.iterator();
+    while(bulletIter.hasNext()){
+      Bullet temp = bulletIter.next();
+      if(temp.position.x < 0 || temp.position.y < 0 ||temp.position.x > 4000 || temp.position.y > 4000){
+        bullets.remove(temp);
+      }
     }
   }
   /**
